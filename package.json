@@ -1,0 +1,50 @@
+{
+  "name": "just-expr",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Traverse and transform javascript AST to make sure it's JUST expression",
+  "author": "HyperLuna",
+  "license": "MIT",
+  "homepage": "https://github.com/HyperLuna/just-expr#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HyperLuna/just-expr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HyperLuna/just-expr/issues"
+  },
+  "keywords": [
+    "estree",
+    "ast",
+    "expression",
+    "codegen"
+  ],
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "devlop": "^1.1.0",
+    "immer-walker": "^1.0.1",
+    "reserved-identifiers": "^1.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^7.6.1",
+    "@types/estree": "^1.0.8",
+    "astring": "^1.9.0",
+    "eslint": "^10.0.2",
+    "meriyah": "^7.1.0",
+    "typescript": "^5.9.3"
+  }
+}
