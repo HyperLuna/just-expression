@@ -1,17 +1,17 @@
 {
-  "name": "just-expr",
+  "name": "just-expression",
   "type": "module",
   "version": "1.0.0",
   "description": "Traverse and transform JavaScript AST to make sure it's JUST an expression",
   "author": "HyperLuna",
   "license": "MIT",
-  "homepage": "https://github.com/HyperLuna/just-expr#readme",
+  "homepage": "https://github.com/HyperLuna/just-expression#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HyperLuna/just-expr.git"
+    "url": "git+https://github.com/HyperLuna/just-expression.git"
   },
   "bugs": {
-    "url": "https://github.com/HyperLuna/just-expr/issues"
+    "url": "https://github.com/HyperLuna/just-expression/issues"
   },
   "keywords": [
     "estree",

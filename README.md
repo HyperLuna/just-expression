@@ -1,4 +1,4 @@
-# just-expr
+# just-expression
 
 > Traverse and transform JavaScript AST to make sure it's **JUST** an expression.
 
@@ -17,7 +17,7 @@ Finally, it compiles the AST into a function that users can call safely.
 ## Installation
 
 ```bash
-npm i just-expr
+npm i just-expression
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ npm i just-expr
 ```typescript
 import type { Expression } from 'estree'
 import { generate } from 'astring'
-import { compile } from 'just-expr'
+import { compile } from 'just-expression'
 import { parse } from 'meriyah'
 
 function to_ast(code: string): Expression {
@@ -166,7 +166,7 @@ Returns a function equivalent to `ast`, with parameters matching `params`.
 
 ## Limitation
 
-just-expr only supports the following expressions (ESTree Nodes):
+just-expression only supports the following expressions (ESTree Nodes):
 
 - Identifier
 - Literal

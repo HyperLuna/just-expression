@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { generate } from 'astring'
-import { compile, transform } from 'just-expr'
+import { compile, transform } from 'just-expression'
 import { parse } from 'meriyah'
 
 function to_ast(code) {
