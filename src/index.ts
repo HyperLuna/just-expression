@@ -6,7 +6,6 @@ import type {
   Pattern,
   Property,
 } from 'estree'
-import { ok } from 'devlop'
 import { ENTER, walker } from 'immer-walker'
 
 import { isIdent } from './util.js'
@@ -48,6 +47,12 @@ function extractDeclaration(pattern: Pattern, scope: string[]): void {
   }
 }
 
+function test(cond: boolean, err: string): undefined {
+  if (!cond) {
+    throw new SyntaxError(err)
+  }
+}
+
 export function transform(
   ast: Expression,
   params: string[] = [],
@@ -75,11 +80,6 @@ export function transform(
 
   const walk = walker({
     [ENTER](node) {
-      function test(cond: boolean, err: string): undefined {
-        if (!cond) {
-          throw new SyntaxError(err)
-        }
-      }
       const expr = node as AnyNode
       switch (expr.type) {
         case 'Identifier':
@@ -138,15 +138,6 @@ export function transform(
       if (node.body.type === 'BlockStatement') {
         throw new SyntaxError(`arrow function with block statement is not allowed`)
       } else {
-        //   const scope: string[] = []
-        //   for (const p of node.params) {
-        //     extractDeclaration(p, scope)
-        //   }
-        //   return {
-        //     ...node,
-        //     body: walk(node.body, [...scope, ...state]),
-        //   }
-        // }
         const length = state.length
         for (const p of node.params) {
           extractDeclaration(p, state)
@@ -165,8 +156,8 @@ export function transform(
       }
     },
     MemberExpression(node, state): MemberExpression {
-      ok(node.object.type !== 'Super')
-      ok(node.property.type !== 'PrivateIdentifier')
+      test(node.object.type !== 'Super', 'not allowed node type Super')
+      test(node.property.type !== 'PrivateIdentifier', 'not allowed node type PrivateIdentifier')
 
       const object = walk(node.object, state)
       const property = node.computed ? walk(node.property, state) : node.property
@@ -180,16 +171,9 @@ export function transform(
           property,
         }
       }
-
-      // return {
-      //   ...node,
-      //   object: walk(node.object, state),
-      //   // if !node.computed, skip visiting node.property
-      //   property: node.computed ? walk(node.property, state) : node.property,
-      // }
     },
     Property(node, state): Property {
-      ok(node.key.type !== 'PrivateIdentifier')
+      test(node.key.type !== 'PrivateIdentifier', 'not allowed node type PrivateIdentifier')
 
       const key = node.computed ? walk(node.key, state) : node.key
       const value = walk(node.value, state)
@@ -203,13 +187,6 @@ export function transform(
           value,
         }
       }
-
-      // return {
-      //   ...node,
-      //   // if !node.computed, skip visiting node.key
-      //   key: node.computed ? walk(node.key, state) : node.key,
-      //   value: walk(node.value, state),
-      // }
     },
     Identifier(node, state) {
       if (state.includes(node.name)) {
